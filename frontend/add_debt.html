@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة دين جديد</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">إضافة دين جديد</h1>
+        <form id="addDebtForm">
+            <div class="mb-3">
+                <label for="debtorName" class="form-label">اسم المدين</label>
+                <input type="text" class="form-control" id="debtorName" required>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label">المبلغ</label>
+                <input type="number" class="form-control" id="amount" required>
+            </div>
+            <div class="mb-3">
+                <label for="dueDate" class="form-label">تاريخ الاستحقاق</label>
+                <input type="date" class="form-control" id="dueDate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">حفظ الدين</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+        <a href="/index.html" class="btn btn-secondary mt-3">العودة إلى القائمة الرئيسية</a>
+    </div>
+
+    <script>
+        document.getElementById('addDebtForm' ).addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const debtorName = document.getElementById('debtorName').value;
+            const amount = document.getElementById('amount').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const messageDiv = document.getElementById('message');
+            const token = localStorage.getItem('token');
+
+            // تأكد من أن هذا الرابط هو رابط الواجهة الخلفية الصحيح الخاص بك
+            const backendUrl = 'https://debt-app-backend-su0l.onrender.com/api/debts';
+
+            try {
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        debtorName: debtorName,
+                        amount: parseFloat(amount ),
+                        dueDate: dueDate
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageDiv.innerHTML = '<div class="alert alert-success">تم حفظ الدين بنجاح!</div>';
+                    document.getElementById('addDebtForm').reset();
+                } else {
+                    messageDiv.innerHTML = `<div class="alert alert-danger">فشل حفظ الدين: ${result.message || 'خطأ غير معروف'}</div>`;
+                }
+            } catch (error) {
+                messageDiv.innerHTML = `<div class="alert alert-danger">حدث خطأ في الشبكة: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
