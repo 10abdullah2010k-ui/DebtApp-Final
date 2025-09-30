@@ -3,88 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة الديون</title>
-    
-    <!-- Bootstrap & Fonts -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>اختر إجراءً</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .choice-container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1 );
+        }
+        .choice-container h1 {
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">نظام الديون</a>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <button id="logout-button" class="btn btn-danger">تسجيل الخروج</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        <!-- Add Debt Form -->
-        <div class="p-4 border rounded mb-5" style="background-color: #fff;">
-            <h2 class="mb-4">إضافة دين جديد</h2>
-            <form id="add-debt-form">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="name" class="form-label">اسم الشخص</label>
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="amount" class="form-label">المبلغ</label>
-                        <input type="number" class="form-control" id="amount" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="due-date" class="form-label">تاريخ الاستحقاق</label>
-                        <input type="date" class="form-control" id="due-date" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="notes" class="form-label">ملاحظات (اختياري )</label>
-                        <input type="text" class="form-control" id="notes">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary w-100 mt-3">حفظ الدين</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Debts List -->
-        <div class="p-4 border rounded" style="background-color: #fff;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2>قائمة الديون</h2>
-                <button id="export-excel" class="btn btn-success">تصدير إلى Excel</button>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">اسم الشخص</th>
-                            <th scope="col">المبلغ</th>
-                            <th scope="col">تاريخ الاستحقاق</th>
-                            <th scope="col">ملاحظات</th>
-                            <th scope="col">إجراء</th>
-                        </tr>
-                    </thead>
-                    <tbody id="debts-list">
-                        <!-- سيتم إضافة الديون هنا عبر الجافاسكريبت -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="choice-container">
+        <h1>ماذا تريد أن تفعل؟</h1>
+        <a href="/debts.html" class="btn btn-primary btn-custom">عرض الديون المسجلة</a>
+        <a href="/add_debt.html" class="btn btn-success btn-custom">إضافة دين جديد</a>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
-    
-    <!-- ملفات الجافاسكريبت الخاصة بنا -->
-    <script src="auth.js"></script> <!-- هذا الملف للمصادقة وتسجيل الخروج -->
-    <script src="main.js"></script> <!-- هذا هو الملف الجديد والمدمج لكل وظائف الديون -->
-
 </body>
 </html>
